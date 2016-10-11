@@ -46,7 +46,10 @@ export default function(state = initialState, action) {
             newMediaStatesById[newSourceMediaState.id] = newSourceMediaState;
             newMediaStatesById[newDestinationMediaState.id] = newDestinationMediaState;
 
-            return newMediaStatesById;
+            newState = {
+                mediaStatesById: newMediaStatesById
+            };
+            return newState;
     }
 
     return state;

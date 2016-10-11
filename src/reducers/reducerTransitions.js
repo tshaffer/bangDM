@@ -26,7 +26,10 @@ export default function(state = initialState, action) {
 
             newTransitionsById[transition.id] = transition;
 
-            return newTransitionsById;
+            newState = {
+                transitionsById: newTransitionsById
+            };
+            return newState;
     }
 
     return state;
