@@ -16,7 +16,3 @@ let zoneAction = store.dispatch(newZone('Zone1', "images", true));
 state = store.getState();
 console.log("state:");
 console.log(state);
-
-console.log("zoneAction");
-console.log(zoneAction);
-

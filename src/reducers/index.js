@@ -5,8 +5,8 @@ import zoneReducer from './reducerZone';
 // import transitionReducer from './reducerTransition';
 //
 const tdmReducer = combineReducers({
+    zones: zoneReducer,
     sign: signReducer,
-    zones: zoneReducer
     // mediaStates: mediaStateReducer,
     // transitions: transitionReducer
 });

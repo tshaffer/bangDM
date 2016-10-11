@@ -5,6 +5,6 @@ export default class Sign {
         this.id = guid();
         this.name = name;
         this.videoMode = videoMode;
-        this.zones = [];
+        this.zoneIds = [];
     }
 }

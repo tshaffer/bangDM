@@ -12,7 +12,7 @@ export default function(state = emptyZone, action) {
         case NEW_ZONE:
             let {name, zoneType, nonInteractive} = payload;
             let newZone = new Zone(name, zoneType, nonInteractive);
-            action.zoneId = newZone.id;
+            action.payload.zoneId = newZone.id;
             return newZone;
     }
 
