@@ -23,7 +23,11 @@ console.log(state);
 const contentItem1 = new ContentItem("contentItem1", "media", "testFiles/image1.jpg");
 const mediaState1 = new MediaState("mediaState1", contentItem1.id);
 // specify zone!!
-const addMediaStateAction = store.dispatch(addMediaState("mediaState1", mediaState1));
+let addMediaStateAction = store.dispatch(addMediaState("mediaState1", mediaState1));
+
+const contentItem2 = new ContentItem("contentItem2", "media", "testFiles/image2.jpg");
+const mediaState2 = new MediaState("mediaState2", contentItem2.id);
+addMediaStateAction = store.dispatch(addMediaState("mediaState2", mediaState2));
 
 state = store.getState();
 console.log("state:");

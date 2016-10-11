@@ -34,6 +34,10 @@ export default function(state = emptyZone, action) {
 
             newZone.mediaStateIds = mediaStateIds;
             newZone.mediaStatesById = mediaStatesById;
+
+            if (!newZone.initialMediaStateId || newZone.initialMediaStateId == "") {
+                newZone.initialMediaStateId = mediaState.id;
+            }
             return newZone;
     }
 
