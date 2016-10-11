@@ -17,6 +17,14 @@ exports.default = function () {
             var videoMode = payload.videoMode;
 
             return new _sign2.default(name, videoMode);
+        case _index.NEW_ZONE:
+            var zoneId = payload.zoneId;
+
+            var zoneIds = Object.assign([], state.zoneIds);
+            zoneIds.push(zoneId);
+            var newState = Object.assign({}, state);
+            newState.zoneIds = zoneIds;
+            return newState;
     }
 
     return state;
