@@ -1,6 +1,6 @@
 {
   "name": "bangDM",
-  "version": "0.0.1",
+  "version": "0.0.7",
   "description": "Bang Data Model",
   "main": "index.js",
   "scripts": {
