@@ -21,11 +21,12 @@ export const newZone = (name, type, nonInteractive) => ({
     }
 });
 
-export const addMediaState = ( name, mediaState ) => ({
+export const addMediaState = ( name, mediaState, zoneId ) => ({
     type: ADD_MEDIA_STATE,
     payload: {
         name,
-        mediaState
+        mediaState,
+        zoneId
     }
 });
 

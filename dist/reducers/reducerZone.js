@@ -5,60 +5,61 @@ Object.defineProperty(exports, "__esModule", {
 });
 
 exports.default = function () {
-    var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : emptyZone;
+    var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;
     var action = arguments[1];
     var type = action.type;
     var payload = action.payload;
 
+
+    var newState = void 0;
 
     var newZone = void 0;
     var name = void 0;
 
     switch (type) {
         case _index.NEW_ZONE:
+
             name = payload.name;
             var zoneType = payload.zoneType;
             var nonInteractive = payload.nonInteractive;
 
 
-            newZone = new _zone2.default(name, zoneType, nonInteractive);
-            action.payload.zoneId = newZone.id;
-            return newZone;
+            newState = Object.assign({}, state);
+
+            _newZone = new _zone2.default(name, zoneType, nonInteractive);
+            action.payload.zoneId = _newZone.id;
+
+            newState.zonesById[_newZone.id] = _newZone;
+            return newState;
 
         case _index.ADD_MEDIA_STATE:
+
+            console.log("pooppoop");
+
             name = payload.name;
             var mediaState = payload.mediaState;
+            var zoneId = payload.zoneId;
 
 
-            newZone = Object.assign(emptyZone, state);
+            var zone = state.zonesById[zoneId];
+            var _newZone = Object.assign({}, zone);
 
-            var mediaStateIds = Object.assign([], state.mediaStateIds);
+            var mediaStateIds = Object.assign([], zone.mediaStateIds);
             mediaStateIds.push(mediaState.id);
 
-            var mediaStatesById = Object.assign({}, state.mediaStatesById);
+            var mediaStatesById = Object.assign({}, zone.mediaStatesById);
             mediaStatesById[mediaState.id] = mediaState;
 
-            newZone.mediaStateIds = mediaStateIds;
-            newZone.mediaStatesById = mediaStatesById;
+            _newZone.mediaStateIds = mediaStateIds;
+            _newZone.mediaStatesById = mediaStatesById;
 
-            if (!newZone.initialMediaStateId || newZone.initialMediaStateId == "") {
-                newZone.initialMediaStateId = mediaState.id;
+            if (!_newZone.initialMediaStateId || _newZone.initialMediaStateId == "") {
+                _newZone.initialMediaStateId = mediaState.id;
             }
-            return newZone;
 
-        // case ADD_TRANSITION:
-        //
-        //     let { sourceMediaState, transition, destinationMediaState } = payload;
-        //
-        //     newZone = Object.assign(emptyZone, state);
-        //
-        //     let newSoureMediaState = newZone.mediaStatesById[sourceMediaState.id];
-        //     newSourceMediaState.transitionOutIds.push(transition.id);
-        //
-        //     let newDestinationMediaState = newZone.mediaStatesById[targetMediaState.id];
-        //     newDestinationMediaState.transitionInIds.push(transition.id);
-        //
-        //     return newZone;
+            newState = Object.assign({}, state);
+            newState.zonesById[_newZone.id] = _newZone;
+            return newState;
     }
 
     return state;
@@ -72,4 +73,6 @@ var _zone2 = _interopRequireDefault(_zone);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var emptyZone = new _zone2.default("Untitled", "images", true);
+var initialState = {
+    zonesById: {}
+};

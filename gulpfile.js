@@ -22,4 +22,9 @@ gulp.task('default', () => {
             presets: ['es2015']
         }))
         .pipe(gulp.dest('dist/entities'));
+    gulp.src('src/actions/*.js')
+        .pipe(babel({
+            presets: ['es2015']
+        }))
+        .pipe(gulp.dest('dist/actions'));
 });

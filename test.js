@@ -17,6 +17,7 @@ console.log("state:");
 console.log(state);
 
 let zoneAction = store.dispatch(newZone('Zone1', "images", true));
+let zoneId = zoneAction.payload.zoneId;
 
 state = store.getState();
 console.log("state:");
@@ -25,7 +26,7 @@ console.log(state);
 const contentItem1 = new ContentItem("contentItem1", "media", "testFiles/image1.jpg");
 const mediaState1 = new MediaState("mediaState1", contentItem1.id);
 // specify zone!!
-let addMediaStateAction = store.dispatch(addMediaState("mediaState1", mediaState1));
+let addMediaStateAction = store.dispatch(addMediaState("mediaState1", mediaState1, zoneId));
 
 const contentItem2 = new ContentItem("contentItem2", "media", "testFiles/image2.jpg");
 const mediaState2 = new MediaState("mediaState2", contentItem2.id);

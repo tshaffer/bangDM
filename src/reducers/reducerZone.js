@@ -2,34 +2,49 @@ import { NEW_ZONE, ADD_MEDIA_STATE, ADD_TRANSITION } from '../actions/index';
 
 import Zone from '../entities/zone';
 
-const emptyZone = new Zone("Untitled", "images", true);
+const initialState =
+{
+    zonesById: {}
+};
 
-export default function(state = emptyZone, action) {
+
+export default function(state = initialState, action) {
 
     const {type, payload} = action;
+
+    let newState;
 
     let newZone;
     let name;
 
     switch (type) {
         case NEW_ZONE:
+
             name = payload.name;
             let { zoneType, nonInteractive} = payload;
 
+            newState = Object.assign({}, state);
+
             newZone = new Zone(name, zoneType, nonInteractive);
             action.payload.zoneId = newZone.id;
-            return newZone;
+
+            newState.zonesById[newZone.id] = newZone;
+            return newState;
 
         case ADD_MEDIA_STATE:
+
+            console.log("pooppoop");
+
             name = payload.name;
-            let {  mediaState } = payload;
+            let {  mediaState, zoneId } = payload;
 
-            newZone = Object.assign(emptyZone, state);
+            let zone = state.zonesById[zoneId];
+            let newZone = Object.assign({}, zone);
 
-            let mediaStateIds = Object.assign([], state.mediaStateIds);
+            let mediaStateIds = Object.assign([], zone.mediaStateIds);
             mediaStateIds.push(mediaState.id);
 
-            let mediaStatesById = Object.assign({}, state.mediaStatesById);
+            let mediaStatesById = Object.assign({}, zone.mediaStatesById);
             mediaStatesById[mediaState.id] = mediaState;
 
             newZone.mediaStateIds = mediaStateIds;
@@ -38,21 +53,10 @@ export default function(state = emptyZone, action) {
             if (!newZone.initialMediaStateId || newZone.initialMediaStateId == "") {
                 newZone.initialMediaStateId = mediaState.id;
             }
-            return newZone;
 
-        // case ADD_TRANSITION:
-        //
-        //     let { sourceMediaState, transition, destinationMediaState } = payload;
-        //
-        //     newZone = Object.assign(emptyZone, state);
-        //
-        //     let newSoureMediaState = newZone.mediaStatesById[sourceMediaState.id];
-        //     newSourceMediaState.transitionOutIds.push(transition.id);
-        //
-        //     let newDestinationMediaState = newZone.mediaStatesById[targetMediaState.id];
-        //     newDestinationMediaState.transitionInIds.push(transition.id);
-        //
-        //     return newZone;
+            newState = Object.assign({}, state);
+            newState.zonesById[newZone.id] = newZone;
+            return newState;
     }
 
     return state;
