@@ -1,7 +1,7 @@
 import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk'
 
-import tdmReducer from './src/reducers/index';
+import bangReducer from './src/reducers/index';
 import { newSign, newZone, addMediaState, addTransition } from './src/actions/index';
 
 import MediaState from './src/entities/mediaState';
@@ -9,7 +9,7 @@ import ContentItem from './src/entities/contentItem';
 import Event from './src/entities/event';
 import Transition from './src/entities/transition';
 
-let store = createStore(tdmReducer, applyMiddleware(thunk));
+let store = createStore(bangReducer, applyMiddleware(thunk));
 store.dispatch(newSign('TestSign', "1920x1080x60p"));
 
 let state = store.getState();

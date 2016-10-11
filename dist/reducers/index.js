@@ -24,11 +24,11 @@ var _reducerTransitions2 = _interopRequireDefault(_reducerTransitions);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var tdmReducer = (0, _redux.combineReducers)({
+var bangReducer = (0, _redux.combineReducers)({
     zones: _reducerZone2.default,
     sign: _reducerSign2.default,
     mediaStates: _reducerMediaStates2.default,
     transitions: _reducerTransitions2.default
 });
 
-exports.default = tdmReducer;
+exports.default = bangReducer;

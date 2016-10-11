@@ -4,11 +4,11 @@ import zoneReducer from './reducerZone';
 import mediaStatesReducer from './reducerMediaStates';
 import transitionsReducer from './reducerTransitions';
 
-const tdmReducer = combineReducers({
+const bangReducer = combineReducers({
     zones: zoneReducer,
     sign: signReducer,
     mediaStates: mediaStatesReducer,
     transitions: transitionsReducer
 });
 
-export default tdmReducer;
+export default bangReducer;
