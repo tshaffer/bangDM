@@ -2,10 +2,12 @@ import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk'
 
 import tdmReducer from './src/reducers/index';
-import { newSign, newZone, addMediaState } from './src/actions/index';
+import { newSign, newZone, addMediaState, addTransition } from './src/actions/index';
 
 import MediaState from './src/entities/mediaState';
 import ContentItem from './src/entities/contentItem';
+import Event from './src/entities/event';
+import Transition from './src/entities/transition';
 
 let store = createStore(tdmReducer, applyMiddleware(thunk));
 store.dispatch(newSign('TestSign', "1920x1080x60p"));
@@ -28,6 +30,15 @@ let addMediaStateAction = store.dispatch(addMediaState("mediaState1", mediaState
 const contentItem2 = new ContentItem("contentItem2", "media", "testFiles/image2.jpg");
 const mediaState2 = new MediaState("mediaState2", contentItem2.id);
 addMediaStateAction = store.dispatch(addMediaState("mediaState2", mediaState2));
+
+state = store.getState();
+console.log("state:");
+console.log(state);
+
+const timeoutEvent = new Event("timeout", "timeout", 5);
+// use objects instead of id's in app?
+const transition = new Transition("m1To2", mediaState1.id, timeoutEvent.id, mediaState2.id);
+store.dispatch(addTransition(mediaState1, transition, mediaState2));
 
 state = store.getState();
 console.log("state:");

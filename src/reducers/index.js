@@ -1,14 +1,14 @@
 import {combineReducers} from 'redux';
 import signReducer from './reducerSign';
 import zoneReducer from './reducerZone';
-// import mediaStateReducer from './reducerMediaState';
-// import transitionReducer from './reducerTransition';
-//
+import mediaStatesReducer from './reducerMediaStates';
+import transitionsReducer from './reducerTransitions';
+
 const tdmReducer = combineReducers({
     zones: zoneReducer,
     sign: signReducer,
-    // mediaStates: mediaStateReducer,
-    // transitions: transitionReducer
+    mediaStates: mediaStatesReducer,
+    transitions: transitionsReducer
 });
 
 export default tdmReducer;

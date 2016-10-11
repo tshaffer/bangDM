@@ -1,4 +1,4 @@
-import { NEW_ZONE, ADD_MEDIA_STATE } from '../actions/index';
+import { NEW_ZONE, ADD_MEDIA_STATE, ADD_TRANSITION } from '../actions/index';
 
 import Zone from '../entities/zone';
 
@@ -39,6 +39,20 @@ export default function(state = emptyZone, action) {
                 newZone.initialMediaStateId = mediaState.id;
             }
             return newZone;
+
+        // case ADD_TRANSITION:
+        //
+        //     let { sourceMediaState, transition, destinationMediaState } = payload;
+        //
+        //     newZone = Object.assign(emptyZone, state);
+        //
+        //     let newSoureMediaState = newZone.mediaStatesById[sourceMediaState.id];
+        //     newSourceMediaState.transitionOutIds.push(transition.id);
+        //
+        //     let newDestinationMediaState = newZone.mediaStatesById[targetMediaState.id];
+        //     newDestinationMediaState.transitionInIds.push(transition.id);
+        //
+        //     return newZone;
     }
 
     return state;

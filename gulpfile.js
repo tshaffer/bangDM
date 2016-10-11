@@ -17,4 +17,9 @@ gulp.task('default', () => {
             presets: ['es2015']
         }))
         .pipe(gulp.dest('dist/reducers'));
+    gulp.src('src/entities/*.js')
+        .pipe(babel({
+            presets: ['es2015']
+        }))
+        .pipe(gulp.dest('dist/entities'));
 });
