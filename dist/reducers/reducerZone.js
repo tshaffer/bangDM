@@ -72,6 +72,8 @@ var _zone = require('../entities/zone');
 
 var _zone2 = _interopRequireDefault(_zone);
 
+var _reducerContentItems = require('./reducerContentItems');
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var initialState = {
@@ -92,10 +94,8 @@ var initialState = {
 //     }
 // }
 
-// should be a zone parameter as well
+// a zone parameter should be supplied as well
 var getMediaStates = exports.getMediaStates = function getMediaStates(state) {
-
-    console.log("poopoo");
 
     var mediaStates = [];
 
@@ -108,20 +108,22 @@ var getMediaStates = exports.getMediaStates = function getMediaStates(state) {
         var zone = zonesById[zoneId];
         var mediaState = zone.mediaStatesById[zone.initialMediaStateId];
         while (mediaState) {
+            mediaState.contentItem = (0, _reducerContentItems.getContentItem)(state, mediaState.contentItemId);
             mediaStates.push(mediaState);
             var _mediaState = mediaState;
             var transitionOutIds = _mediaState.transitionOutIds;
 
             if (transitionOutIds.length === 0) {
                 mediaState = null;
-            }
-            var transitionOutId = transitionOutIds[0];
-            var transitionOut = state.transitions.transitionsById[transitionOutId];
-            var targetMediaStateId = transitionOut.targetMediaStateId;
-            if (targetMediaStateId && targetMediaStateId == zone.initialMediaStateId) {
-                mediaState = null;
             } else {
-                mediaState = zone.mediaStatesById[targetMediaStateId];
+                var transitionOutId = transitionOutIds[0];
+                var transitionOut = state.transitions.transitionsById[transitionOutId];
+                var targetMediaStateId = transitionOut.targetMediaStateId;
+                if (targetMediaStateId && targetMediaStateId == zone.initialMediaStateId) {
+                    mediaState = null;
+                } else {
+                    mediaState = zone.mediaStatesById[targetMediaStateId];
+                }
             }
         }
     }

@@ -2,6 +2,7 @@
 export const NEW_SIGN = 'NEW_SIGN';
 export const NEW_ZONE = 'NEW_ZONE';
 export const ADD_MEDIA_STATE = 'ADD_MEDIA_STATE';
+export const ADD_CONTENT_ITEM = 'ADD_CONTENT_ITEM';
 export const ADD_TRANSITION = 'ADD_TRANSITION';
 
 export const newSign = (name, mode) => ({
@@ -29,6 +30,13 @@ export const addMediaState = ( name, mediaState, zoneId ) => ({
         zoneId
     }
 });
+
+export const addContentItem = ( contentItem ) => ({
+    type: ADD_CONTENT_ITEM,
+    payload: {
+        contentItem
+    }
+})
 
 export const addTransition = ( sourceMediaState, transition, destinationMediaState ) => ({
     type: ADD_TRANSITION,

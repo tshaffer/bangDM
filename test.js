@@ -2,7 +2,7 @@ import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk'
 
 import bangReducer from './src/reducers/index';
-import { newSign, newZone, addMediaState, addTransition } from './src/actions/index';
+import { newSign, newZone, addMediaState, addContentItem, addTransition } from './src/actions/index';
 import { getMediaStates } from './src/reducers/reducerZone';
 
 import MediaState from './src/entities/mediaState';
@@ -27,11 +27,13 @@ console.log("state:");
 console.log(state);
 
 const contentItem1 = new ContentItem("contentItem1", "media", "testFiles/image1.jpg");
+store.dispatch(addContentItem(contentItem1));
 const mediaState1 = new MediaState("mediaState1", contentItem1.id);
 // specify zone!!
 let addMediaStateAction = store.dispatch(addMediaState("mediaState1", mediaState1, zoneId));
 
 const contentItem2 = new ContentItem("contentItem2", "media", "testFiles/image2.jpg");
+store.dispatch(addContentItem(contentItem2));
 const mediaState2 = new MediaState("mediaState2", contentItem2.id);
 addMediaStateAction = store.dispatch(addMediaState("mediaState2", mediaState2, zoneId));
 
@@ -56,3 +58,5 @@ console.log(state);
 const mediaStates = getMediaStates(state);
 console.log("mediaStates");
 console.log(mediaStates);
+
+console.log("poopoo");

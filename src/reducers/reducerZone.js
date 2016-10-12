@@ -2,6 +2,8 @@ import { NEW_ZONE, ADD_MEDIA_STATE, ADD_TRANSITION } from '../actions/index';
 
 import Zone from '../entities/zone';
 
+import { getContentItem } from './reducerContentItems';
+
 const initialState =
 {
     zonesById: {}
@@ -76,10 +78,8 @@ export default function(state = initialState, action) {
 //     }
 // }
 
-// should be a zone parameter as well
+// a zone parameter should be supplied as well
 export const getMediaStates = (state)  => {
-
-    console.log("poopoo");
 
     let mediaStates = [];
 
@@ -92,19 +92,22 @@ export const getMediaStates = (state)  => {
         const zone = zonesById[zoneId];
         let mediaState = zone.mediaStatesById[zone.initialMediaStateId];
         while (mediaState) {
+            mediaState.contentItem = getContentItem(state, mediaState.contentItemId);
             mediaStates.push(mediaState);
             const {transitionOutIds}= mediaState;
             if (transitionOutIds.length === 0) {
                 mediaState = null;
             }
-            const transitionOutId = transitionOutIds[0];
-            const transitionOut = state.transitions.transitionsById[transitionOutId];
-            const targetMediaStateId = transitionOut.targetMediaStateId;
-            if (targetMediaStateId && targetMediaStateId == zone.initialMediaStateId) {
-                mediaState = null;
-            }
             else {
-                mediaState = zone.mediaStatesById[targetMediaStateId];
+                const transitionOutId = transitionOutIds[0];
+                const transitionOut = state.transitions.transitionsById[transitionOutId];
+                const targetMediaStateId = transitionOut.targetMediaStateId;
+                if (targetMediaStateId && targetMediaStateId == zone.initialMediaStateId) {
+                    mediaState = null;
+                }
+                else {
+                    mediaState = zone.mediaStatesById[targetMediaStateId];
+                }
             }
         }
     }

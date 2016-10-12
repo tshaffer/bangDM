@@ -18,6 +18,10 @@ var _reducerMediaStates = require('./reducerMediaStates');
 
 var _reducerMediaStates2 = _interopRequireDefault(_reducerMediaStates);
 
+var _reducerContentItems = require('./reducerContentItems');
+
+var _reducerContentItems2 = _interopRequireDefault(_reducerContentItems);
+
 var _reducerTransitions = require('./reducerTransitions');
 
 var _reducerTransitions2 = _interopRequireDefault(_reducerTransitions);
@@ -28,6 +32,7 @@ var bangReducer = (0, _redux.combineReducers)({
     zones: _reducerZone2.default,
     sign: _reducerSign2.default,
     mediaStates: _reducerMediaStates2.default,
+    contentItems: _reducerContentItems2.default,
     transitions: _reducerTransitions2.default
 });
 

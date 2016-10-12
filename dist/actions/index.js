@@ -7,6 +7,7 @@ Object.defineProperty(exports, "__esModule", {
 var NEW_SIGN = exports.NEW_SIGN = 'NEW_SIGN';
 var NEW_ZONE = exports.NEW_ZONE = 'NEW_ZONE';
 var ADD_MEDIA_STATE = exports.ADD_MEDIA_STATE = 'ADD_MEDIA_STATE';
+var ADD_CONTENT_ITEM = exports.ADD_CONTENT_ITEM = 'ADD_CONTENT_ITEM';
 var ADD_TRANSITION = exports.ADD_TRANSITION = 'ADD_TRANSITION';
 
 var newSign = exports.newSign = function newSign(name, mode) {
@@ -37,6 +38,15 @@ var addMediaState = exports.addMediaState = function addMediaState(name, mediaSt
             name: name,
             mediaState: mediaState,
             zoneId: zoneId
+        }
+    };
+};
+
+var addContentItem = exports.addContentItem = function addContentItem(contentItem) {
+    return {
+        type: ADD_CONTENT_ITEM,
+        payload: {
+            contentItem: contentItem
         }
     };
 };
