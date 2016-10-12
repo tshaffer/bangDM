@@ -93,15 +93,24 @@ export const getMediaStates = (state)  => {
         let mediaState = zone.mediaStatesById[zone.initialMediaStateId];
         while (mediaState) {
             mediaStates.push(mediaState);
-            const transitionOutIds = { mediaState };
+            const {transitionOutIds}= mediaState;
             if (transitionOutIds.length === 0) {
                 mediaState = null;
             }
-            const targetMediaStateId = transitionOutIds[0];
-            // check that targetMediaStateId exists - safe programming
-            mediaState = zone.mediaStatesById[targetMediaStateId];
+            const transitionOutId = transitionOutIds[0];
+            const transitionOut = state.transitions.transitionsById[transitionOutId];
+            const targetMediaStateId = transitionOut.targetMediaStateId;
+            if (targetMediaStateId && targetMediaStateId == zone.initialMediaStateId) {
+                mediaState = null;
+            }
+            else {
+                mediaState = zone.mediaStatesById[targetMediaStateId];
+            }
         }
     }
 
     return mediaStates;
 }
+
+// mediaState.transitionOutIds is actually an array of transitions right now, not transitionIds
+// and the targetMediaStateId is, in the code above, set to the transitionId, not to the targetMediaStateId

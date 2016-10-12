@@ -38,10 +38,10 @@ export default function(state = initialState, action) {
             newMediaStatesById = Object.assign({}, state.mediaStatesById);
 
             let newSourceMediaState = Object.assign({}, sourceMediaState);
-            newSourceMediaState.transitionOutIds.push(transition);
+            newSourceMediaState.transitionOutIds.push(transition.id);
 
             let newDestinationMediaState = Object.assign({}, destinationMediaState);
-            newDestinationMediaState.transitionInIds.push(transition);
+            newDestinationMediaState.transitionInIds.push(transition.id);
 
             newMediaStatesById[newSourceMediaState.id] = newSourceMediaState;
             newMediaStatesById[newDestinationMediaState.id] = newDestinationMediaState;

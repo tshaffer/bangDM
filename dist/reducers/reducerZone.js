@@ -3,6 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
+exports.getMediaStates = undefined;
 
 exports.default = function () {
     var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;
@@ -76,3 +77,57 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var initialState = {
     zonesById: {}
 };
+
+// Selectors
+
+// export const getZoneById = (state, props) => {
+//     let zoneState = state.zones.zonesById[props.id];
+//
+//     if (zoneState) {
+//         const zone = new Zone(zoneState);
+//         return zone;
+//     }
+//     else {
+//         return undefined;
+//     }
+// }
+
+// should be a zone parameter as well
+var getMediaStates = exports.getMediaStates = function getMediaStates(state) {
+
+    console.log("poopoo");
+
+    var mediaStates = [];
+
+    // the state that is currently passed in is the entire state, not just the zones portion
+    var zones = state.zones;
+    var zonesById = zones.zonesById;
+
+    // cheating - only one zone
+    for (var zoneId in zonesById) {
+        var zone = zonesById[zoneId];
+        var mediaState = zone.mediaStatesById[zone.initialMediaStateId];
+        while (mediaState) {
+            mediaStates.push(mediaState);
+            var _mediaState = mediaState;
+            var transitionOutIds = _mediaState.transitionOutIds;
+
+            if (transitionOutIds.length === 0) {
+                mediaState = null;
+            }
+            var transitionOutId = transitionOutIds[0];
+            var transitionOut = state.transitions.transitionsById[transitionOutId];
+            var targetMediaStateId = transitionOut.targetMediaStateId;
+            if (targetMediaStateId && targetMediaStateId == zone.initialMediaStateId) {
+                mediaState = null;
+            } else {
+                mediaState = zone.mediaStatesById[targetMediaStateId];
+            }
+        }
+    }
+
+    return mediaStates;
+};
+
+// mediaState.transitionOutIds is actually an array of transitions right now, not transitionIds
+// and the targetMediaStateId is, in the code above, set to the transitionId, not to the targetMediaStateId
