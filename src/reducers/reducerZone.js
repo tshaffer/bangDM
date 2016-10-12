@@ -61,3 +61,47 @@ export default function(state = initialState, action) {
 
     return state;
 }
+
+// Selectors
+
+// export const getZoneById = (state, props) => {
+//     let zoneState = state.zones.zonesById[props.id];
+//
+//     if (zoneState) {
+//         const zone = new Zone(zoneState);
+//         return zone;
+//     }
+//     else {
+//         return undefined;
+//     }
+// }
+
+// should be a zone parameter as well
+export const getMediaStates = (state)  => {
+
+    console.log("poopoo");
+
+    let mediaStates = [];
+
+    // the state that is currently passed in is the entire state, not just the zones portion
+    const zones = state.zones;
+    const zonesById = zones.zonesById;
+
+    // cheating - only one zone
+    for (let zoneId in zonesById) {
+        const zone = zonesById[zoneId];
+        let mediaState = zone.mediaStatesById[zone.initialMediaStateId];
+        while (mediaState) {
+            mediaStates.push(mediaState);
+            const transitionOutIds = { mediaState };
+            if (transitionOutIds.length === 0) {
+                mediaState = null;
+            }
+            const targetMediaStateId = transitionOutIds[0];
+            // check that targetMediaStateId exists - safe programming
+            mediaState = zone.mediaStatesById[targetMediaStateId];
+        }
+    }
+
+    return mediaStates;
+}
