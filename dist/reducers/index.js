@@ -26,6 +26,10 @@ var _reducerTransitions = require('./reducerTransitions');
 
 var _reducerTransitions2 = _interopRequireDefault(_reducerTransitions);
 
+var _reducerEvents = require('./reducerEvents');
+
+var _reducerEvents2 = _interopRequireDefault(_reducerEvents);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var bangReducer = (0, _redux.combineReducers)({
@@ -33,7 +37,8 @@ var bangReducer = (0, _redux.combineReducers)({
     sign: _reducerSign2.default,
     mediaStates: _reducerMediaStates2.default,
     contentItems: _reducerContentItems2.default,
-    transitions: _reducerTransitions2.default
+    transitions: _reducerTransitions2.default,
+    events: _reducerEvents2.default
 });
 
 exports.default = bangReducer;

@@ -4,6 +4,8 @@ export const NEW_ZONE = 'NEW_ZONE';
 export const ADD_MEDIA_STATE = 'ADD_MEDIA_STATE';
 export const ADD_CONTENT_ITEM = 'ADD_CONTENT_ITEM';
 export const ADD_TRANSITION = 'ADD_TRANSITION';
+export const DELETE_TRANSITION = 'DELETE_TRANSITION';
+export const ADD_EVENT = 'ADD_EVENT';
 
 export const newSign = (name, mode) => ({
     type: NEW_SIGN,
@@ -36,7 +38,7 @@ export const addContentItem = ( contentItem ) => ({
     payload: {
         contentItem
     }
-})
+});
 
 export const addTransition = ( sourceMediaState, transition, destinationMediaState ) => ({
     type: ADD_TRANSITION,
@@ -47,3 +49,16 @@ export const addTransition = ( sourceMediaState, transition, destinationMediaSta
     }
 });
 
+export const deleteTransition = ( transitionId, ) => ({
+    type: DELETE_TRANSITION,
+    payload: {
+        transitionId
+    }
+});
+
+export const addEvent = ( event ) => ({
+    type: ADD_EVENT,
+    payload: {
+        event
+    }
+})

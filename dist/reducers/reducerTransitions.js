@@ -32,6 +32,17 @@ exports.default = function () {
                 transitionsById: newTransitionsById
             };
             return newState;
+
+        case _index.DELETE_TRANSITION:
+
+            newTransitionsById = Object.assign({}, state.transitionsById);
+
+            delete newTransitionsById[payload.transitionId];
+
+            newState = {
+                transitionsById: newTransitionsById
+            };
+            return newState;
     }
 
     return state;

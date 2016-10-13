@@ -1,4 +1,5 @@
 import { ADD_TRANSITION } from '../actions/index';
+import { DELETE_TRANSITION } from '../actions/index';
 
 import Transition from '../entities/transition';
 
@@ -25,6 +26,17 @@ export default function(state = initialState, action) {
             newTransitionsById = Object.assign({}, state.transitionsById);
 
             newTransitionsById[transition.id] = transition;
+
+            newState = {
+                transitionsById: newTransitionsById
+            };
+            return newState;
+
+        case DELETE_TRANSITION:
+
+            newTransitionsById = Object.assign({}, state.transitionsById);
+
+            delete newTransitionsById[payload.transitionId];
 
             newState = {
                 transitionsById: newTransitionsById
