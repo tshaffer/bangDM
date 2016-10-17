@@ -71,15 +71,15 @@ exports.default = function () {
                 var _loop = function _loop(mediaStateId) {
                     var mediaState = newMediaStatesById[mediaStateId];
 
-                    mediaState.transitionsInIds.forEach(function (transitionInId, index) {
+                    mediaState.transitionInIds.forEach(function (transitionInId, index) {
                         if (transitionInId == idOfTransitionToDelete) {
-                            mediaState.transitionsIn.splice(index, 1);
+                            mediaState.transitionInIds.splice(index, 1);
                             return;
                         }
                     });
-                    mediaState.transitionsOutIds.forEach(function (transitionOutId, index) {
+                    mediaState.transitionOutIds.forEach(function (transitionOutId, index) {
                         if (transitionOutId == idOfTransitionToDelete) {
-                            mediaState.transitionsOut.splice(index, 1);
+                            mediaState.transitionOutIds.splice(index, 1);
                             return;
                         }
                     });
